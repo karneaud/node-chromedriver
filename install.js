@@ -17,11 +17,11 @@ var configuredfilePath = process.env.npm_config_chromedriver_filepath || process
 // adapt http://chromedriver.storage.googleapis.com/
 cdnUrl = cdnUrl.replace(/\/+$/, '');
 var downloadUrl = cdnUrl + '/%s/chromedriver_%s.zip';
-var platform = process.platform;
-
+var platform = process.env.npm_config_chromedriver_platform || process.env.CHROMEDRIVER_PLATFORM || process.platform;
+var chromedriver_arch = process.env.npm_config_chromedriver_arch || process.env.CHROMEDRIVER_ARCH || process.arch;
 var chromedriver_version = process.env.npm_config_chromedriver_version || process.env.CHROMEDRIVER_VERSION || helper.version;
 if (platform === 'linux') {
-  if (process.arch === 'x64') {
+  if (chromedriver_arch === 'x64') {
     platform += '64';
   } else {
     console.log('Only Linux 64 bits supported.');
